@@ -1,0 +1,2 @@
+UserName,UserPass,ExpectedResult,LogOut,CloseBrowser
+Luke,Skywalker,TRUE,FALSE,FALSE

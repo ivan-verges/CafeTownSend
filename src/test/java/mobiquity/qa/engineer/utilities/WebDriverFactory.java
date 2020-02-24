@@ -1,4 +1,4 @@
-package mobiquity.qa.engineer;
+package mobiquity.qa.engineer.utilities;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,36 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import mobiquity.qa.engineer.utilities.Constants;
+
 public class WebDriverFactory
 {
 	
 	private static WebDriver chromeDriver;
 	private static WebDriver firefoxDriver;
-	
-	/*
-	 * Return a String With The File Name Based On The Operating System To Select The Right Web Driver
-	 * @Return String
-	*/
-	private static String getWebDriverFileName()
-	{
-		String fileName = "";
-		String OS = System.getProperty("os.name").toLowerCase();
-		
-		if(OS.indexOf("win") >= 0)
-		{
-			fileName = "windows.exe";
-		}
-		else if(OS.indexOf("mac") >= 0)
-		{
-			fileName = "mac";
-		}
-		else if(OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") >= 0)
-		{
-			fileName = "linux";
-		}
-		
-		return fileName;
-	}
 	
 	/*
 	 * Returns a Singleton Google Chrome WebDriver Object Instance
@@ -163,12 +140,12 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewChromeDriver()
 	{
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chrome/" + getWebDriverFileName());
+		System.setProperty("webdriver.chrome.driver", Constants.getChromeDriverBasePath() + Utilities.getWebDriverFileName());
 		
 		WebDriver cd = new ChromeDriver();
 		
 		//Set Default Timeout in Seconds
-		cd.manage().timeouts().implicitlyWait(Constants.DefaultTimeoutSeconds, TimeUnit.SECONDS);
+		cd.manage().timeouts().implicitlyWait(Constants.getDefaultTimeoutSeconds(), TimeUnit.SECONDS);
 		
 		//Maximize Browser Window
 		cd.manage().window().maximize();
@@ -228,12 +205,12 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewFirefoxDriver()
 	{
-		System.setProperty("webdriver.gecko.driver", "src/test/resources/webdriver/firefox/" + getWebDriverFileName());
+		System.setProperty("webdriver.gecko.driver", Constants.getFirefoxDriverBasePath() + Utilities.getWebDriverFileName());
 		
 		WebDriver fd = new FirefoxDriver();
 		
 		//Set Default Timeout in Seconds
-		fd.manage().timeouts().implicitlyWait(Constants.DefaultTimeoutSeconds, TimeUnit.SECONDS);
+		fd.manage().timeouts().implicitlyWait(Constants.getDefaultTimeoutSeconds(), TimeUnit.SECONDS);
 		
 		//Maximize Browser Window
 		fd.manage().window().maximize();

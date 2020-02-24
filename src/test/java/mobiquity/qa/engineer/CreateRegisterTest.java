@@ -13,6 +13,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import mobiquity.qa.engineer.utilities.Utilities;
+import mobiquity.qa.engineer.utilities.WebDriverFactory;
+import mobiquity.qa.engineer.utilities.Constants;
+
 @RunWith(Parameterized.class)
 public class CreateRegisterTest
 {
@@ -29,7 +33,7 @@ public class CreateRegisterTest
 		ArrayList<Object[]> scenaries = new ArrayList<Object[]>();
 		
 		//Read Escenaries From a CSV File
-		for(String[] data : Utilities.getTestDataFromCSV(Constants.LoginTestDataPath, ","))
+		for(String[] data : Utilities.getTestDataFromCSV(Constants.getCreateTestDataPath(), ","))
 		{
 			scenaries.add(new Object[] {data[0], data[1], data[2].equalsIgnoreCase("true"), data[3].equalsIgnoreCase("true"), data[4].equalsIgnoreCase("true")});
 		}
@@ -53,7 +57,7 @@ public class CreateRegisterTest
 	public void setUp()
 	{
 		//Gets a Mozilla Firefox Browser to Test Passed URL
-		driver = WebDriverFactory.getSingleFirefoxDriver(Constants.WebURL);
+		driver = WebDriverFactory.getSingleFirefoxDriver(Constants.getWebURL());
 	}
 	
 	@Test
@@ -192,7 +196,7 @@ public class CreateRegisterTest
         Alert alert = driver.switchTo().alert();
         alert.accept();
         
-        Utilities.waitForSeconds(5);
+        Utilities.waitForSeconds(10);
         
         //Verifies if Data Exsits After Delete
   		employeeList = Utilities.getWebElementFromXpath(driver, Constants.MainWebElementsPaths.EmployeesList.getXpath());

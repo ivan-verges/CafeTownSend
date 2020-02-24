@@ -1,5 +1,7 @@
 package mobiquity.qa.engineer;
 
+import mobiquity.qa.engineer.utilities.Utilities;
+
 public class Main
 {
 	public static void main(String[] args)

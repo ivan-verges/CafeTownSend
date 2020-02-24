@@ -12,6 +12,10 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import mobiquity.qa.engineer.utilities.Utilities;
+import mobiquity.qa.engineer.utilities.WebDriverFactory;
+import mobiquity.qa.engineer.utilities.Constants;
+
 @RunWith(Parameterized.class)
 public class LoginTest
 {
@@ -32,7 +36,7 @@ public class LoginTest
 		ArrayList<Object[]> scenaries = new ArrayList<Object[]>();
 		
 		//Read Escenaries From a CSV File
-		for(String[] data : Utilities.getTestDataFromCSV(Constants.LoginTestDataPath, ","))
+		for(String[] data : Utilities.getTestDataFromCSV(Constants.getLoginTestDataPath(), ","))
 		{
 			scenaries.add(new Object[] {data[0], data[1], data[2].equalsIgnoreCase("true"), data[3].equalsIgnoreCase("true"), data[4].equalsIgnoreCase("true")});
 		}
@@ -61,7 +65,7 @@ public class LoginTest
 	public void setUp()
 	{
 		//Gets a Mozilla Firefox Browser to Test Passed URL
-		driver = WebDriverFactory.getSingleFirefoxDriver(Constants.WebURL);
+		driver = WebDriverFactory.getSingleFirefoxDriver(Constants.getWebURL());
 	}
 	
 	@Test

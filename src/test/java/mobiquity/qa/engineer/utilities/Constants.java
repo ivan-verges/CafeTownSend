@@ -1,14 +1,56 @@
-package mobiquity.qa.engineer;
+package mobiquity.qa.engineer.utilities;
 
 public class Constants
 {
-	public static String WebURL = "http://cafetownsend-angular-rails.herokuapp.com/";
-	public static int DefaultTimeoutSeconds = 5;
-	public static String LoginTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\login.csv";
-	public static String CreateTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\create.csv";
-	public static String UpdateTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\update.csv";
-	public static String DeleteTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\delete.csv";
+	private static String WebURL = "http://cafetownsend-angular-rails.herokuapp.com/";
+	private static int DefaultTimeoutSeconds = 5;
+	private static String LoginTestDataPath = "testdata/login.csv";
+	private static String CreateTestDataPath = "testdata/create.csv";
+	private static String UpdateTestDataPath = "testdata/update.csv";
+	private static String DeleteTestDataPath = "testdata/delete.csv";
+	private static String ChromeDriverBasePath = "webdriver/chrome/";
+	private static String FirefoxDriverBasePath = "webdriver/firefox/";
 	
+	public static String getWebURL()
+	{
+		return WebURL;
+	}
+
+	public static int getDefaultTimeoutSeconds()
+	{
+		return DefaultTimeoutSeconds;
+	}
+	
+	public static String getLoginTestDataPath()
+	{
+		return Utilities.getResourcePath(LoginTestDataPath);
+	}
+
+	public static String getCreateTestDataPath()
+	{
+		return Utilities.getResourcePath(CreateTestDataPath);
+	}
+
+	public static String getUpdateTestDataPath()
+	{
+		return Utilities.getResourcePath(UpdateTestDataPath);
+	}
+
+	public static String getDeleteTestDataPath()
+	{
+		return Utilities.getResourcePath(DeleteTestDataPath);
+	}
+	
+	public static String getChromeDriverBasePath()
+	{
+		return Utilities.getResourcePath(ChromeDriverBasePath);
+	}
+	
+	public static String getFirefoxDriverBasePath()
+	{
+		return Utilities.getResourcePath(FirefoxDriverBasePath);
+	}
+
 	public static enum LoginWebElementsPaths
 	{
 		LoginButton("/html/body/div/div/div/form/fieldset/button"),
