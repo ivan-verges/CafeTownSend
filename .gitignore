@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # Target Folder for Eclipse
-.target/
+target
 
 # Package Files #
 *.jar
