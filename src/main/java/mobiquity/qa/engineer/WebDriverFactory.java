@@ -27,7 +27,7 @@ public class WebDriverFactory
 		}
 		else if(OS.indexOf("mac") >= 0)
 		{
-			fileName = "mace";
+			fileName = "mac";
 		}
 		else if(OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") >= 0)
 		{
@@ -163,7 +163,7 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewChromeDriver()
 	{
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/webdriver/chrome/" + getWebDriverFileName());
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chrome/" + getWebDriverFileName());
 		
 		WebDriver cd = new ChromeDriver();
 		
@@ -228,7 +228,7 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewFirefoxDriver()
 	{
-		System.setProperty("webdriver.gecko.driver", "./src/test/resources/webdriver/firefox/" + getWebDriverFileName());
+		System.setProperty("webdriver.gecko.driver", "src/test/resources/webdriver/firefox/" + getWebDriverFileName());
 		
 		WebDriver fd = new FirefoxDriver();
 		
