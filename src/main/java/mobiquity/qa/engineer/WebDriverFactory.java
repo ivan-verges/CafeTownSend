@@ -8,8 +8,34 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WebDriverFactory
 {
+	
 	private static WebDriver chromeDriver;
 	private static WebDriver firefoxDriver;
+	
+	/*
+	 * Return a String With The File Name Based On The Operating System To Select The Right Web Driver
+	 * @Return String
+	*/
+	private static String getWebDriverFileName()
+	{
+		String fileName = "";
+		String OS = System.getProperty("os.name").toLowerCase();
+		
+		if(OS.indexOf("win") >= 0)
+		{
+			fileName = "windows.exe";
+		}
+		else if(OS.indexOf("mac") >= 0)
+		{
+			fileName = "mace";
+		}
+		else if(OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") >= 0)
+		{
+			fileName = "linux";
+		}
+		
+		return fileName;
+	}
 	
 	/*
 	 * Returns a Singleton Google Chrome WebDriver Object Instance
@@ -137,7 +163,7 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewChromeDriver()
 	{
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/webdriver/chrome/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/webdriver/chrome/" + getWebDriverFileName());
 		
 		WebDriver cd = new ChromeDriver();
 		
@@ -202,7 +228,7 @@ public class WebDriverFactory
 	*/
 	public static WebDriver getNewFirefoxDriver()
 	{
-		System.setProperty("webdriver.gecko.driver", "./src/test/resources/webdriver/firefox/geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "./src/test/resources/webdriver/firefox/" + getWebDriverFileName());
 		
 		WebDriver fd = new FirefoxDriver();
 		
