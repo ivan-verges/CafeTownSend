@@ -9,12 +9,16 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Utilities
 {
-	//Receives a Test Class, Executes the Tests and Returns It's Result
+	/*
+	 * Receives a Test Class, Executes the Tests and Returns It's Result
+	 * @Return Boolean
+	*/
 	public static <T> boolean getTestResult(Class<T> className)
 	{
 		Result result = JUnitCore.runClasses(className);
@@ -26,6 +30,10 @@ public class Utilities
 	    return result.wasSuccessful();
 	}
 	
+	/*
+	 * Return a String With The Resource Path
+	 * @Return String
+	*/
 	public static String getResourcePath(String resourceName)
 	{
 		String result = null;
@@ -63,6 +71,10 @@ public class Utilities
 		return fileName;
 	}
 	
+	/*
+	 * Return a String[] List All Registers Loaded From The CSV File
+	 * @Return ArrayList<String[]>
+	*/
 	public static ArrayList<String[]> getTestDataFromCSV(String csvPath, String separator)
 	{
 		ArrayList<String[]> result = new ArrayList<String[]>();
@@ -91,6 +103,9 @@ public class Utilities
 		return result;
 	}
 	
+	/*
+	 * Return A Web Element From The XPath
+	 * @Return WebElement*/
 	public static WebElement getWebElementFromXpath(WebDriver driver, String xpath)
 	{
 		WebElement result = null;
@@ -110,6 +125,9 @@ public class Utilities
 		return result;
 	}
 	
+	/*
+	 * Return A WebElement From The ID
+	 * @Return WebElement*/
 	public static WebElement getWebElementFromId(WebDriver driver, String elementId)
 	{
 		WebElement result = null;
@@ -129,6 +147,9 @@ public class Utilities
 		return result;
 	}
 	
+	/*
+	 * Returns A List<WebElement> From A Tag Name
+	 * @Return List<WebElement>*/
 	public static List<WebElement> getWebElementsFromWebElementByTagName(WebElement we, String tagName)
 	{
 		List<WebElement> result = null;
@@ -140,6 +161,8 @@ public class Utilities
 		return result;
 	}
 	
+	/*
+	 * Waits For The Supplied Seconds*/
 	public static void waitForSeconds(int seconds)
 	{
 		try
@@ -216,11 +239,19 @@ public class Utilities
 		return isWebElementSelected(we);
 	}
 	
-	public static boolean clickOnElement(WebElement we)
+	public static void highLightElement(WebDriver driver, WebElement we)
+	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", we);
+	}
+	 
+	public static boolean clickOnElement(WebDriver driver, WebElement we)
 	{
 		boolean result = false;
 		if(we != null)
 		{
+			highLightElement(driver, we);
+			waitForSeconds(1);
 			we.click();
 			waitForSeconds(2);
 			result = true;

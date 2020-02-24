@@ -1,2 +1,4 @@
-UserName,UserPass,ExpectedResult,LogOut,CloseBrowser
-Luke,Skywalker,TRUE,FALSE,FALSE
+FirstName,LastName,CloseBrowser
+Pedrito,Navaja,FALSE
+Juanito,Alimana,FALSE
+Maria,Cristina,FALSE

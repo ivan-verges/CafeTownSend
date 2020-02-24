@@ -1,2 +1,4 @@
-UserName,UserPass,ExpectedResult,LogOut,CloseBrowser
-Luke,Skywalker,TRUE,FALSE,FALSE
+FirstName,LastName,StartDate,Email,CloseBrowser
+Pedro,Jose,2020-01-01,pedrojose@mail.com,FALSE
+Juan,Garcia,2020-01-01,juangarcia@mail.com,FALSE
+Maria,Guillermo,2020-01-01,mariaguillermo@mail.com,FALSE

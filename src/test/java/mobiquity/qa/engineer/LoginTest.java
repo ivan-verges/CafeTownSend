@@ -69,7 +69,7 @@ public class LoginTest
 	}
 	
 	@Test
-	public void testGoogleSearch()
+	public void testExecution()
 	{
 		//Flag For Login Result
 		boolean loginResult = false;
@@ -103,7 +103,7 @@ public class LoginTest
 		assertTrue("Log-In Button Not Found", buttonLogIn != null);
 		if(buttonLogIn != null)
 		{
-			Utilities.clickOnElement(buttonLogIn);
+			Utilities.clickOnElement(driver, buttonLogIn);
 		}
 		
 		//Finds Invalid Credentials Text Element And Verify If Login Was Successful
@@ -136,7 +136,7 @@ public class LoginTest
 				//If Log-Out Flag It's True, Perform Log-Out
 				if(LogOut)
 				{
-					Utilities.clickOnElement(buttonLogOut);
+					Utilities.clickOnElement(driver, buttonLogOut);
 				}
 			}
 		}
