@@ -4,13 +4,19 @@ public class Constants
 {
 	public static String WebURL = "http://cafetownsend-angular-rails.herokuapp.com/";
 	public static int DefaultTimeoutSeconds = 5;
+	public static String LoginTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\login.csv";
+	public static String CreateTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\create.csv";
+	public static String UpdateTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\update.csv";
+	public static String DeleteTestDataPath = "C:\\Users\\verge\\Desktop\\Projects\\Eclipse\\mobiquity.qa.engineer\\src\\test\\resources\\testdata\\delete.csv";
 	
 	public static enum LoginWebElementsPaths
 	{
 		LoginButton("/html/body/div/div/div/form/fieldset/button"),
 	    LogoutButton("/html/body/div/header/div/p[1]"),
+	    UserNameLabel("/html/body/div/div/div/form/fieldset/label[1]/span[1]"),
 		UserNameInput("/html/body/div/div/div/form/fieldset/label[1]/input"),
-	    UserPassInput("/html/body/div/div/div/form/fieldset/label[2]/input"),    
+	    UserPassLabel("/html/body/div/div/div/form/fieldset/label[2]/span"),
+		UserPassInput("/html/body/div/div/div/form/fieldset/label[2]/input"),    
 	    GreetingLabel("/html/body/div/header/div/p[2]"),
 	    InvalidCredentialsLabel("/html/body/div/div/div/form/fieldset/p[1]");
 	 

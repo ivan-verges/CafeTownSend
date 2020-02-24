@@ -1,5 +1,8 @@
 package mobiquity.qa.engineer;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.runner.JUnitCore;
@@ -21,6 +24,34 @@ public class Utilities
 	    }
 	    
 	    return result.wasSuccessful();
+	}
+	
+	public static ArrayList<String[]> getTestDataFromCSV(String csvPath, String separator)
+	{
+		ArrayList<String[]> result = new ArrayList<String[]>();
+		try
+		{
+			BufferedReader csvReader = new BufferedReader(new FileReader(csvPath));
+			String line;
+			int i = 0;
+			while((line = csvReader.readLine()) != null)
+			{
+				if(i == 0)
+				{
+					i++;
+					continue;
+				}
+				
+			    result.add(line.split(separator));
+			}
+			csvReader.close();
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error Reading Data From CSV File: " + csvPath);
+		}
+		
+		return result;
 	}
 	
 	public static WebElement getWebElementFromXpath(WebDriver driver, String xpath)

@@ -2,7 +2,7 @@ package mobiquity.qa.engineer;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.*;
@@ -19,16 +19,22 @@ public class CreateRegisterTest
 	//Web Driver For Browser Management
 	private WebDriver driver;
 	
+	//Parameters For Test Execution
+	private boolean CloseBrowser;
+	
 	@Parameters
 	public static Collection<Object[]> data()
 	{
 		//Distincts Scenaries To Test The Login Function
-		Object[][] scenaries = {
-				//Login With Right Credentials and Leave Session Open for Other Tests
-				{Constants.Credentials.RightUser.getValue(), Constants.Credentials.RightPass.getValue(), true, false}
-		};
+		ArrayList<Object[]> scenaries = new ArrayList<Object[]>();
 		
-		return Arrays.asList(scenaries);
+		//Read Escenaries From a CSV File
+		for(String[] data : Utilities.getTestDataFromCSV(Constants.LoginTestDataPath, ","))
+		{
+			scenaries.add(new Object[] {data[0], data[1], data[2].equalsIgnoreCase("true"), data[3].equalsIgnoreCase("true"), data[4].equalsIgnoreCase("true")});
+		}
+		
+		return scenaries;
 	}
 	
 	/*
@@ -37,9 +43,10 @@ public class CreateRegisterTest
 	 * @Param ExpectedResult = Expected Result For Login (Login Successful = True)
 	 * @Param LogOut = Perform Log Out After Login
 	 * */
-	public CreateRegisterTest(String UserName, String UserPass, boolean ExpectedResult, boolean LogOut)
+	public CreateRegisterTest(String UserName, String UserPass, boolean ExpectedResult, boolean LogOut, boolean CloseBrowser)
 	{
 		super();
+		this.CloseBrowser = CloseBrowser;
 	}
 	
 	@Before
@@ -205,6 +212,9 @@ public class CreateRegisterTest
 	@After
 	public void tearDown()
 	{
-		///driver.close();
+		if(CloseBrowser)
+		{
+			driver.close();
+		}
 	}
 }

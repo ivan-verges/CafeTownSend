@@ -2,7 +2,7 @@ package mobiquity.qa.engineer;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.*;
@@ -23,29 +23,21 @@ public class LoginTest
 	private String UserPass;
 	private boolean ExpectedResult;
 	private boolean LogOut;
+	private boolean CloseBrowser;
 	
 	@Parameters
 	public static Collection<Object[]> data()
 	{
 		//Distincts Scenaries To Test The Login Function
-		Object[][] scenaries = {
-				//Credentials = Right, Login Expected Result = Login OK, Expected Test Result = Pass
-				//{Constants.Credentials.RightUser.getValue(), Constants.Credentials.RightPass.getValue(), true, true},
-				
-				//Credentials = Wrong, Login Expected Result = Login Fail, Expected Test Result = Pass
-				//{Constants.Credentials.WrongUser.getValue(), Constants.Credentials.WrongPass.getValue(), false, false},
-				
-				//Credentials = Right, Login Expected Result = Login OK, Expected Test Result = Fail
-				//{Constants.Credentials.RightUser.getValue(), Constants.Credentials.RightPass.getValue(), false, true},
-				
-				//Credentials = Wrong, Login Expected Result = Login OK, Expected Test Result = Fail
-				//{Constants.Credentials.WrongUser.getValue(), Constants.Credentials.WrongPass.getValue(), true, false},
-				
-				//Login With Right Credentials and Leave Session Open for Other Tests
-				{Constants.Credentials.RightUser.getValue(), Constants.Credentials.RightPass.getValue(), true, false}
-		};
+		ArrayList<Object[]> scenaries = new ArrayList<Object[]>();
 		
-		return Arrays.asList(scenaries);
+		//Read Escenaries From a CSV File
+		for(String[] data : Utilities.getTestDataFromCSV(Constants.LoginTestDataPath, ","))
+		{
+			scenaries.add(new Object[] {data[0], data[1], data[2].equalsIgnoreCase("true"), data[3].equalsIgnoreCase("true"), data[4].equalsIgnoreCase("true")});
+		}
+		
+		return scenaries;
 	}
 	
 	/*
@@ -53,14 +45,16 @@ public class LoginTest
 	 * @Param UserPass = User Password For Login
 	 * @Param ExpectedResult = Expected Result For Login (Login Successful = True)
 	 * @Param LogOut = Perform Log Out After Login
+	 * @Param CloseBrowser = Closes Browser After Running Test
 	 * */
-	public LoginTest(String UserName, String UserPass, boolean ExpectedResult, boolean LogOut)
+	public LoginTest(String UserName, String UserPass, boolean ExpectedResult, boolean LogOut, boolean CloseBrowser)
 	{
 		super();
 		this.UserName = UserName;
 		this.UserPass = UserPass;
 		this.ExpectedResult = ExpectedResult;
 		this.LogOut = LogOut;
+		this.CloseBrowser = CloseBrowser;
 	}
 	
 	@Before
@@ -76,6 +70,10 @@ public class LoginTest
 		//Flag For Login Result
 		boolean loginResult = false;
 		
+		//Finds Label User Name Element And Writes User Name For Login
+		WebElement labelUserName = Utilities.getWebElementFromXpath(driver, Constants.LoginWebElementsPaths.UserNameLabel.getXpath());
+		assertTrue("Label Text For User Name Not Found", labelUserName != null);
+		
 		//Finds Input User Name Element And Writes User Name For Login
 		WebElement inputUserName = Utilities.getWebElementFromXpath(driver, Constants.LoginWebElementsPaths.UserNameInput.getXpath());
 		assertTrue("Input Text For User Name Not Found", inputUserName != null);
@@ -83,6 +81,10 @@ public class LoginTest
 		{
 			Utilities.setTextOnElement(inputUserName, UserName);
 		}
+		
+		//Finds Label User Password Element And Writes User Password For Login
+		WebElement labelUserPass = Utilities.getWebElementFromXpath(driver, Constants.LoginWebElementsPaths.UserPassLabel.getXpath());
+		assertTrue("Input Text For User Password Not Found", labelUserPass != null);
 		
 		//Finds Input User Password Element And Writes User Password For Login
 		WebElement inputUserPass = Utilities.getWebElementFromXpath(driver, Constants.LoginWebElementsPaths.UserPassInput.getXpath());
@@ -142,6 +144,9 @@ public class LoginTest
 	@After
 	public void tearDown()
 	{
-		///driver.close();
+		if(CloseBrowser)
+		{
+			driver.close();
+		}
 	}
 }
